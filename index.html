@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRINERGY STATUS</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f2f5f8;
+    padding:10px;
+}
+
+.container{
+    width:100%;
+    margin:auto;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+    padding:10px;
+}
+
+/* HEADER MOBILE */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    background:#005A9C;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:24px;
+}
+
+.header input{
+    width:100%;
+    padding:10px;
+    font-size:16px;
+}
+
+/* FIELDSET */
+fieldset{
+    margin-top:15px;
+    border:2px solid #005A9C;
+    border-radius:8px;
+    padding:20px 15px 15px;
+    position:relative;
+    overflow:visible;
+}
+
+legend{
+    font-size:18px;
+    font-weight:bold;
+    color:#005A9C;
+    padding:0 8px;
+    background:#fff;
+    margin-left:10px;
+}
+
+/* INPUT */
+input[type=text]{
+    width:100%;
+    padding:10px;
+}
+
+/* TABLE MOBILE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    margin-top:15px;
+    font-size:14px;
+}
+
+th{
+    background:#005A9C;
+    color:white;
+    padding:8px;
+}
+
+td{
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
+    vertical-align:middle;
+}
+
+th:first-child,td:first-child{width:50%;text-align:left;}
+
+/* RADIO BUTTON CENTER */
+input[type=radio]{
+    transform:scale(1.3);
+}
+
+/* REMARK */
+textarea{
+    width:100%;
+    height:80px;
+    margin-top:10px;
+}
+
+/* BUTTON */
+button{
+    width:90%;
+    padding:14px;
+    margin:8px auto;
+    display:block;
+    font-size:16px;
+    background:#005A9C;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* PREVIEW BOX */
+#previewBox {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef2f5;
+    border-radius: 8px;
+}
+
+/* SMALL MOBILE SCREEN */
+@media(max-width:600px){
+    body{ padding:5px; }
+    .header h1{ font-size:22px; }
+    table{ font-size:12px; }
+    td,th{ padding:6px; }
+    fieldset{ padding:8px; }
+    .header{ flex-direction:column; align-items:stretch; }
+    .header-left{ text-align:center; }
+    .header-right{ justify-content:center; }
+}
+
+.header-left{flex:1;text-align:left;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.header-right input{width:170px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <div class="header-left"><h1>TRINERGY STATUS</h1></div>
+    <div class="header-right"><label for="date"><b>Date :</b></label> <input type="date" id="date"></div>
+</div>
+
+<!-- ================= TEST BAY 21 ================= -->
+<fieldset>
+<legend>TEST BAY 21</legend>
+<br>
+<label>UPS Type:</label>
+&nbsp;&nbsp;
+<input type="radio" name="ups21" value="2X"> 2X
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ups21" value="3X"> 3X
+<br><br>
+
+<label for="serial21">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial21">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="b21_firmware" value="Done"></td><td><input type="radio" name="b21_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="b21_lv" value="Done"></td><td><input type="radio" name="b21_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="b21_hipot" value="Done"></td><td><input type="radio" name="b21_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="b21_offset" value="Done"></td><td><input type="radio" name="b21_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="b21_hv" value="Done"></td><td><input type="radio" name="b21_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="b21_full" value="Done"></td><td><input type="radio" name="b21_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="b21_voltage" value="Done"></td><td><input type="radio" name="b21_voltage" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="b21_perf" value="Done"></td><td><input type="radio" name="b21_perf" value="Not Done"></td></tr>
+<tr><td>Short Ckt.</td><td><input type="radio" name="b21_short" value="Done"></td><td><input type="radio" name="b21_short" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="b21_burn" value="Done"></td><td><input type="radio" name="b21_burn" value="Not Done"></td></tr>
+<tr><td>Booster Test</td><td><input type="radio" name="b21_booster" value="Done"></td><td><input type="radio" name="b21_booster" value="Not Done"></td></tr>
+<tr><td>DC Component</td><td><input type="radio" name="b21_dc" value="Done"></td><td><input type="radio" name="b21_dc" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="b21_save" value="Done"></td><td><input type="radio" name="b21_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="b21_480" value="Done"></td><td><input type="radio" name="b21_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="remark21">Remarks:</label>
+<textarea id="remark21"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 22 ================= -->
+<fieldset>
+<legend>TEST BAY 22</legend>
+<br>
+<label>UPS Type:</label>
+&nbsp;&nbsp;
+<input type="radio" name="ups22" value="2X"> 2X
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ups22" value="3X"> 3X
+<br><br>
+
+<label for="serial22">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial22">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="b22_firmware" value="Done"></td><td><input type="radio" name="b22_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="b22_lv" value="Done"></td><td><input type="radio" name="b22_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="b22_hipot" value="Done"></td><td><input type="radio" name="b22_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="b22_offset" value="Done"></td><td><input type="radio" name="b22_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="b22_hv" value="Done"></td><td><input type="radio" name="b22_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="b22_full" value="Done"></td><td><input type="radio" name="b22_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="b22_voltage" value="Done"></td><td><input type="radio" name="b22_voltage" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="b22_perf" value="Done"></td><td><input type="radio" name="b22_perf" value="Not Done"></td></tr>
+<tr><td>Short Ckt.</td><td><input type="radio" name="b22_short" value="Done"></td><td><input type="radio" name="b22_short" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="b22_burn" value="Done"></td><td><input type="radio" name="b22_burn" value="Not Done"></td></tr>
+<tr><td>Booster Test</td><td><input type="radio" name="b22_booster" value="Done"></td><td><input type="radio" name="b22_booster" value="Not Done"></td></tr>
+<tr><td>DC Component</td><td><input type="radio" name="b22_dc" value="Done"></td><td><input type="radio" name="b22_dc" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="b22_save" value="Done"></td><td><input type="radio" name="b22_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="b22_480" value="Done"></td><td><input type="radio" name="b22_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="remark22">Remarks:</label>
+<textarea id="remark22"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 23 ================= -->
+<fieldset>
+<legend>TEST BAY 23</legend>
+<br>
+<label>UPS Type:</label>
+&nbsp;&nbsp;
+<input type="radio" name="ups23" value="2X"> 2X
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ups23" value="3X"> 3X
+<br><br>
+
+<label for="serial23">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial23">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="b23_firmware" value="Done"></td><td><input type="radio" name="b23_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="b23_lv" value="Done"></td><td><input type="radio" name="b23_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="b23_hipot" value="Done"></td><td><input type="radio" name="b23_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="b23_offset" value="Done"></td><td><input type="radio" name="b23_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="b23_hv" value="Done"></td><td><input type="radio" name="b23_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="b23_full" value="Done"></td><td><input type="radio" name="b23_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="b23_voltage" value="Done"></td><td><input type="radio" name="b23_voltage" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="b23_perf" value="Done"></td><td><input type="radio" name="b23_perf" value="Not Done"></td></tr>
+<tr><td>Short Ckt.</td><td><input type="radio" name="b23_short" value="Done"></td><td><input type="radio" name="b23_short" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="b23_burn" value="Done"></td><td><input type="radio" name="b23_burn" value="Not Done"></td></tr>
+<tr><td>Booster Test</td><td><input type="radio" name="b23_booster" value="Done"></td><td><input type="radio" name="b23_booster" value="Not Done"></td></tr>
+<tr><td>DC Component</td><td><input type="radio" name="b23_dc" value="Done"></td><td><input type="radio" name="b23_dc" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="b23_save" value="Done"></td><td><input type="radio" name="b23_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="b23_480" value="Done"></td><td><input type="radio" name="b23_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="remark23">Remarks:</label>
+<textarea id="remark23"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 26 ================= -->
+<fieldset>
+<legend>TEST BAY 26</legend>
+<br>
+<label>UPS Type:</label>
+&nbsp;&nbsp;
+<input type="radio" name="ups26" value="2X"> 2X
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ups26" value="3X"> 3X
+<br><br>
+
+<label for="serial26">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial26">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="b26_firmware" value="Done"></td><td><input type="radio" name="b26_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="b26_lv" value="Done"></td><td><input type="radio" name="b26_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="b26_hipot" value="Done"></td><td><input type="radio" name="b26_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="b26_offset" value="Done"></td><td><input type="radio" name="b26_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="b26_hv" value="Done"></td><td><input type="radio" name="b26_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="b26_full" value="Done"></td><td><input type="radio" name="b26_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="b26_voltage" value="Done"></td><td><input type="radio" name="b26_voltage" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="b26_perf" value="Done"></td><td><input type="radio" name="b26_perf" value="Not Done"></td></tr>
+<tr><td>Short Ckt.</td><td><input type="radio" name="b26_short" value="Done"></td><td><input type="radio" name="b26_short" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="b26_burn" value="Done"></td><td><input type="radio" name="b26_burn" value="Not Done"></td></tr>
+<tr><td>Booster Test</td><td><input type="radio" name="b26_booster" value="Done"></td><td><input type="radio" name="b26_booster" value="Not Done"></td></tr>
+<tr><td>DC Component</td><td><input type="radio" name="b26_dc" value="Done"></td><td><input type="radio" name="b26_dc" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="b26_save" value="Done"></td><td><input type="radio" name="b26_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="b26_480" value="Done"></td><td><input type="radio" name="b26_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="remark26">Remarks:</label>
+<textarea id="remark26"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 27 ================= -->
+<fieldset>
+<legend>TEST BAY 27</legend>
+<br>
+<label>UPS Type:</label>
+&nbsp;&nbsp;
+<input type="radio" name="ups27" value="2X"> 2X
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ups27" value="3X"> 3X
+<br><br>
+
+<label for="serial27">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial27">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="b27_firmware" value="Done"></td><td><input type="radio" name="b27_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="b27_lv" value="Done"></td><td><input type="radio" name="b27_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="b27_hipot" value="Done"></td><td><input type="radio" name="b27_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="b27_offset" value="Done"></td><td><input type="radio" name="b27_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="b27_hv" value="Done"></td><td><input type="radio" name="b27_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="b27_full" value="Done"></td><td><input type="radio" name="b27_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="b27_voltage" value="Done"></td><td><input type="radio" name="b27_voltage" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="b27_perf" value="Done"></td><td><input type="radio" name="b27_perf" value="Not Done"></td></tr>
+<tr><td>Short Ckt.</td><td><input type="radio" name="b27_short" value="Done"></td><td><input type="radio" name="b27_short" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="b27_burn" value="Done"></td><td><input type="radio" name="b27_burn" value="Not Done"></td></tr>
+<tr><td>Booster Test</td><td><input type="radio" name="b27_booster" value="Done"></td><td><input type="radio" name="b27_booster" value="Not Done"></td></tr>
+<tr><td>DC Component</td><td><input type="radio" name="b27_dc" value="Done"></td><td><input type="radio" name="b27_dc" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="b27_save" value="Done"></td><td><input type="radio" name="b27_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="b27_480" value="Done"></td><td><input type="radio" name="b27_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="remark27">Remarks:</label>
+<textarea id="remark27"></textarea>
+</fieldset>
+
+<!-- ================= STS TEST BAY 1 ================= -->
+<fieldset>
+<legend>STS TEST BAY 1</legend>
+<br>
+<label>UPS Rating:</label>
+&nbsp;&nbsp;
+<input type="radio" name="sts_rating1" value="2400A"> 2400A
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="sts_rating1" value="3000A"> 3000A
+<br><br>
+
+<label for="stsSerial1">Unit Serial Number:</label>
+<br>
+<input type="text" id="stsSerial1">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="sts1_firmware" value="Done"></td><td><input type="radio" name="sts1_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="sts1_lv" value="Done"></td><td><input type="radio" name="sts1_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="sts1_hipot" value="Done"></td><td><input type="radio" name="sts1_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="sts1_offset" value="Done"></td><td><input type="radio" name="sts1_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="sts1_hv" value="Done"></td><td><input type="radio" name="sts1_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="sts1_full" value="Done"></td><td><input type="radio" name="sts1_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="sts1_voltage" value="Done"></td><td><input type="radio" name="sts1_voltage" value="Not Done"></td></tr>
+<tr><td>Current Cal.</td><td><input type="radio" name="sts1_current" value="Done"></td><td><input type="radio" name="sts1_current" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="sts1_perf" value="Done"></td><td><input type="radio" name="sts1_perf" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="sts1_burn" value="Done"></td><td><input type="radio" name="sts1_burn" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="sts1_save" value="Done"></td><td><input type="radio" name="sts1_save" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="stsRemark1">Remarks:</label>
+<textarea id="stsRemark1"></textarea>
+</fieldset>
+
+<!-- ================= STS HEATRUN TEST BAY 1 ================= -->
+<fieldset>
+<legend>STS HEATRUN TEST BAY 1</legend>
+<br>
+<label>UPS Rating:</label>
+&nbsp;&nbsp;
+<input type="radio" name="heat_rating1" value="2400A"> 2400A
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="heat_rating1" value="3000A"> 3000A
+<br><br>
+
+<label for="heatSerial1">Unit Serial Number:</label>
+<br>
+<input type="text" id="heatSerial1">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Burn In</td><td><input type="radio" name="heat1_burn" value="Done"></td><td><input type="radio" name="heat1_burn" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="heat1_save" value="Done"></td><td><input type="radio" name="heat1_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="heat1_480" value="Done"></td><td><input type="radio" name="heat1_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="heatRemark1">Remarks:</label>
+<textarea id="heatRemark1"></textarea>
+</fieldset>
+
+<!-- ================= STS TEST BAY 2 ================= -->
+<fieldset>
+<legend>STS TEST BAY 2</legend>
+<br>
+<label>UPS Rating:</label>
+&nbsp;&nbsp;
+<input type="radio" name="sts2_rating" value="2400A"> 2400A
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="sts2_rating" value="3000A"> 3000A
+<br><br>
+
+<label for="stsSerial2">Unit Serial Number:</label>
+<br>
+<input type="text" id="stsSerial2">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Firmware</td><td><input type="radio" name="sts2_firmware" value="Done"></td><td><input type="radio" name="sts2_firmware" value="Not Done"></td></tr>
+<tr><td>L.V.</td><td><input type="radio" name="sts2_lv" value="Done"></td><td><input type="radio" name="sts2_lv" value="Not Done"></td></tr>
+<tr><td>Hipot</td><td><input type="radio" name="sts2_hipot" value="Done"></td><td><input type="radio" name="sts2_hipot" value="Not Done"></td></tr>
+<tr><td>Offset Cal.</td><td><input type="radio" name="sts2_offset" value="Done"></td><td><input type="radio" name="sts2_offset" value="Not Done"></td></tr>
+<tr><td>H.V.</td><td><input type="radio" name="sts2_hv" value="Done"></td><td><input type="radio" name="sts2_hv" value="Not Done"></td></tr>
+<tr><td>Full Load</td><td><input type="radio" name="sts2_full" value="Done"></td><td><input type="radio" name="sts2_full" value="Not Done"></td></tr>
+<tr><td>Voltage Cal.</td><td><input type="radio" name="sts2_voltage" value="Done"></td><td><input type="radio" name="sts2_voltage" value="Not Done"></td></tr>
+<tr><td>Current Cal.</td><td><input type="radio" name="sts2_current" value="Done"></td><td><input type="radio" name="sts2_current" value="Not Done"></td></tr>
+<tr><td>Performance</td><td><input type="radio" name="sts2_perf" value="Done"></td><td><input type="radio" name="sts2_perf" value="Not Done"></td></tr>
+<tr><td>Burn In</td><td><input type="radio" name="sts2_burn" value="Done"></td><td><input type="radio" name="sts2_burn" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="sts2_save" value="Done"></td><td><input type="radio" name="sts2_save" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="stsRemark2">Remarks:</label>
+<textarea id="stsRemark2"></textarea>
+</fieldset>
+
+<!-- ================= STS HEATRUN TEST BAY 2 ================= -->
+<fieldset>
+<legend>STS HEATRUN TEST BAY 2</legend>
+<br>
+<label>UPS Rating:</label>
+&nbsp;&nbsp;
+<input type="radio" name="heat2_rating" value="2400A"> 2400A
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="heat2_rating" value="3000A"> 3000A
+<br><br>
+
+<label for="heatSerial2">Unit Serial Number:</label>
+<br>
+<input type="text" id="heatSerial2">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+<tr><td>Burn In</td><td><input type="radio" name="heat2_burn" value="Done"></td><td><input type="radio" name="heat2_burn" value="Not Done"></td></tr>
+<tr><td>Data Save</td><td><input type="radio" name="heat2_save" value="Done"></td><td><input type="radio" name="heat2_save" value="Not Done"></td></tr>
+<tr><td>480V/60Hz</td><td><input type="radio" name="heat2_480" value="Done"></td><td><input type="radio" name="heat2_480" value="Not Done"></td></tr>
+</table>
+
+<br>
+<label for="heatRemark2">Remarks:</label>
+<textarea id="heatRemark2"></textarea>
+</fieldset>
+
+<br><br>
+
+<button type="button" onclick="previewData()">PREVIEW</button>
+<button type="button" onclick="downloadTXT()">DOWNLOAD TXT</button>
+
+<div id="previewBox"></div>
+
+</div>
+
+<script>
+function getRadio(name){
+    let x = document.querySelector('input[name="'+name+'"]:checked');
+    return x ? x.value : "";
+}
+
+function formatDate(dateString) {
+    if(!dateString) return "";
+    let parts = dateString.split("-");
+    if(parts.length === 3) {
+        return parts[2] + "-" + parts[1] + "-" + parts[0];
+    }
+    return dateString;
+}
+
+function addPreview(title, serial, specLabel, specValue, tests, remark){
+    let output = "";
+    output += "<hr>";
+    output += "<h3>" + title + "</h3>";
+    
+    if(specValue !== "") output += "<b>" + specLabel + ":</b> " + specValue + "<br>";
+    output += "<b>Serial Number:</b> " + serial + "<br><br>";
+
+    tests.forEach(function(t){
+        output += t[0] + " : " + (t[1] || "N/A") + "<br>";
+    });
+
+    if(remark && remark.trim() !== "") {
+        output += "<br><b>Remarks:</b> " + remark + "<br>";
+    }
+
+    return output;
+}
+
+function previewData(){
+    let rawDate = document.getElementById("date").value;
+    let formattedDate = formatDate(rawDate);
+
+    let output = "";
+    output += "<h2>TRINERGY STATUS</h2>";
+    output += "Date : " + formattedDate + "<br>";
+
+    // NORMAL BAYS (21, 22, 23, 26, 27)
+    let bays = [21, 22, 23, 26, 27];
+    bays.forEach(function(bay){
+        output += addPreview(
+            "TEST BAY " + bay,
+            document.getElementById("serial" + bay).value,
+            "UPS Type",
+            getRadio("ups" + bay),
+            [
+                ["Firmware", getRadio("b" + bay + "_firmware")],
+                ["L.V.", getRadio("b" + bay + "_lv")],
+                ["Hipot", getRadio("b" + bay + "_hipot")],
+                ["Offset Cal.", getRadio("b" + bay + "_offset")],
+                ["H.V.", getRadio("b" + bay + "_hv")],
+                ["Full Load", getRadio("b" + bay + "_full")],
+                ["Voltage Cal.", getRadio("b" + bay + "_voltage")],
+                ["Performance", getRadio("b" + bay + "_perf")],
+                ["Short Ckt.", getRadio("b" + bay + "_short")],
+                ["Burn In", getRadio("b" + bay + "_burn")],
+                ["Booster Test", getRadio("b" + bay + "_booster")],
+                ["DC Component", getRadio("b" + bay + "_dc")],
+                ["Data Save", getRadio("b" + bay + "_save")],
+                ["480V/60Hz", getRadio("b" + bay + "_480")]
+            ],
+            document.getElementById("remark" + bay).value
+        );
+    });
+
+    // STS BAY 1
+    output += addPreview(
+        "STS TEST BAY 1",
+        document.getElementById("stsSerial1").value,
+        "UPS Rating",
+        getRadio("sts_rating1"),
+        [
+            ["Firmware", getRadio("sts1_firmware")],
+            ["L.V.", getRadio("sts1_lv")],
+            ["Hipot", getRadio("sts1_hipot")],
+            ["Offset Cal.", getRadio("sts1_offset")],
+            ["H.V.", getRadio("sts1_hv")],
+            ["Full Load", getRadio("sts1_full")],
+            ["Voltage Cal.", getRadio("sts1_voltage")],
+            ["Current Cal.", getRadio("sts1_current")],
+            ["Performance", getRadio("sts1_perf")],
+            ["Burn In", getRadio("sts1_burn")],
+            ["Data Save", getRadio("sts1_save")]
+        ],
+        document.getElementById("stsRemark1").value
+    );
+
+    // HEATRUN 1
+    output += addPreview(
+        "STS HEATRUN TEST BAY 1",
+        document.getElementById("heatSerial1").value,
+        "UPS Rating",
+        getRadio("heat_rating1"),
+        [
+            ["Burn In", getRadio("heat1_burn")],
+            ["Data Save", getRadio("heat1_save")],
+            ["480V/60Hz", getRadio("heat1_480")]
+        ],
+        document.getElementById("heatRemark1").value
+    );
+
+    // STS BAY 2
+    output += addPreview(
+        "STS TEST BAY 2",
+        document.getElementById("stsSerial2").value,
+        "UPS Rating",
+        getRadio("sts2_rating"),
+        [
+            ["Firmware", getRadio("sts2_firmware")],
+            ["L.V.", getRadio("sts2_lv")],
+            ["Hipot", getRadio("sts2_hipot")],
+            ["Offset Cal.", getRadio("sts2_offset")],
+            ["H.V.", getRadio("sts2_hv")],
+            ["Full Load", getRadio("sts2_full")],
+            ["Voltage Cal.", getRadio("sts2_voltage")],
+            ["Current Cal.", getRadio("sts2_current")],
+            ["Performance", getRadio("sts2_perf")],
+            ["Burn In", getRadio("sts2_burn")],
+            ["Data Save", getRadio("sts2_save")]
+        ],
+        document.getElementById("stsRemark2").value
+    );
+
+    // HEATRUN 2
+    output += addPreview(
+        "STS HEATRUN TEST BAY 2",
+        document.getElementById("heatSerial2").value,
+        "UPS Rating",
+        getRadio("heat2_rating"),
+        [
+            ["Burn In", getRadio("heat2_burn")],
+            ["Data Save", getRadio("heat2_save")],
+            ["480V/60Hz", getRadio("heat2_480")]
+        ],
+        document.getElementById("heatRemark2").value
+    );
+
+    document.getElementById("previewBox").innerHTML = output;
+}
+
+function downloadTXT(){
+    previewData();
+    let text = document.getElementById("previewBox").innerText;
+    let blob = new Blob([text], {type: "text/plain"});
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "TRINERGY_STATUS.txt";
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+</script>
+
+</body>
+</html>
