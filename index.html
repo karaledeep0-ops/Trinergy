@@ -1021,7 +1021,7 @@ function copyClipboard() {
 
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
-            alert("Copied WhatsApp format to clipboard.");
+            alert("Copied Daily Trinergy Status format to clipboard.");
         }).catch(() => {
             fallbackCopyText(text);
         });
@@ -1051,7 +1051,7 @@ function fallbackCopyText(text) {
     try {
         const successful = document.execCommand('copy');
         if (successful) {
-            alert("Copied WhatsApp format to clipboard.");
+            alert("Copied Daily Trinergy Status format to clipboard.");
         } else {
             alert("Unable to copy automatically. Please select text manually.");
         }
