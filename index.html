@@ -1021,7 +1021,7 @@ function copyClipboard() {
 
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
-            alert("Copied Daily Trinergy Status format to Clipboard.");
+            alert("Copied Daily Trinergy Status to Clipboard.");
         }).catch(() => {
             fallbackCopyText(text);
         });
@@ -1051,7 +1051,7 @@ function fallbackCopyText(text) {
     try {
         const successful = document.execCommand('copy');
         if (successful) {
-            alert("Copied Daily Trinergy Status format to Clipboard.");
+            alert("Copied Daily Trinergy Status to Clipboard.");
         } else {
             alert("Unable to copy automatically. Please select text manually.");
         }
