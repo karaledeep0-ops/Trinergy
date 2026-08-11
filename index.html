@@ -469,10 +469,10 @@ textarea:focus {
         <div class="radio-group-container">
             <span class="radio-label">UPS Type:</span>
             <label class="radio-option">
-                <input type="radio" name="lv_ups_1" value="2X" onclick="handleRadioToggle(this)"> 2X
+                <input type="radio" name="lv_ups_1" value="2X" onclick="handleRadioToggle(this, () => updateLvRemarks(1))"> 2X
             </label>
             <label class="radio-option">
-                <input type="radio" name="lv_ups_1" value="3X" onclick="handleRadioToggle(this)"> 3X
+                <input type="radio" name="lv_ups_1" value="3X" onclick="handleRadioToggle(this, () => updateLvRemarks(1))"> 3X
             </label>
         </div>
 
@@ -707,6 +707,19 @@ function setStatus(btn, key, value) {
     }
 }
 
+function updateLvRemarks(index) {
+    const type = getRadio('lv_ups_' + index);
+    const remarkBox = document.getElementById('lvRemark_' + index);
+
+    if (type === '2X') {
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: ";
+    } else if (type === '3X') {
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: \nCore 3: ";
+    } else {
+        if(remarkBox) remarkBox.value = "";
+    }
+}
+
 function addLvStatus() {
     lvCount++;
     const container = document.getElementById('lvContainer');
@@ -714,34 +727,36 @@ function addLvStatus() {
     fieldset.className = 'sub-fieldset';
     fieldset.id = 'lv_fieldset_' + lvCount;
     
+    const currentCount = lvCount;
+    
     fieldset.innerHTML = `
-        <legend>LV STATUS FOR CORE #${lvCount}</legend>
+        <legend>LV STATUS FOR CORE #${currentCount}</legend>
         <div class="radio-group-container">
             <span class="radio-label">UPS Type:</span>
             <label class="radio-option">
-                <input type="radio" name="lv_ups_${lvCount}" value="2X" onclick="handleRadioToggle(this)"> 2X
+                <input type="radio" name="lv_ups_${currentCount}" value="2X" onclick="handleRadioToggle(this, () => updateLvRemarks(${currentCount}))"> 2X
             </label>
             <label class="radio-option">
-                <input type="radio" name="lv_ups_${lvCount}" value="3X" onclick="handleRadioToggle(this)"> 3X
+                <input type="radio" name="lv_ups_${currentCount}" value="3X" onclick="handleRadioToggle(this, () => updateLvRemarks(${currentCount}))"> 3X
             </label>
         </div>
 
-        <label for="lvSerial_${lvCount}">Unit Serial Number:</label>
+        <label for="lvSerial_${currentCount}">Unit Serial Number:</label>
         <br>
-        <input type="text" id="lvSerial_${lvCount}" class="lv-serial">
+        <input type="text" id="lvSerial_${currentCount}" class="lv-serial">
         <br><br>
 
         <table>
             <tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
-            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_firmware', 'Not Done')">❌</button></td></tr>
-            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_lv', 'Not Done')">❌</button></td></tr>
-            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_hipot', 'Not Done')">❌</button></td></tr>
-            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${lvCount}_offset', 'Not Done')">❌</button></td></tr>
+            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_firmware', 'Not Done')">❌</button></td></tr>
+            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_lv', 'Not Done')">❌</button></td></tr>
+            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_hipot', 'Not Done')">❌</button></td></tr>
+            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_offset', 'Not Done')">❌</button></td></tr>
         </table>
 
         <br>
-        <label for="lvRemark_${lvCount}">Remarks:</label>
-        <textarea id="lvRemark_${lvCount}"></textarea>
+        <label for="lvRemark_${currentCount}">Remarks:</label>
+        <textarea id="lvRemark_${currentCount}"></textarea>
     `;
     container.appendChild(fieldset);
 }
@@ -790,19 +805,23 @@ function updateBoosterRows(bay) {
     const row1 = document.getElementById('b' + bay + '_booster_c1_row');
     const row2 = document.getElementById('b' + bay + '_booster_c2_row');
     const row3 = document.getElementById('b' + bay + '_booster_c3_row');
+    const remarkBox = document.getElementById('remark' + bay);
 
     if (type === '2X') {
         if(row1) row1.style.display = 'table-row';
         if(row2) row2.style.display = 'table-row';
         if(row3) row3.style.display = 'none';
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: ";
     } else if (type === '3X') {
         if(row1) row1.style.display = 'table-row';
         if(row2) row2.style.display = 'table-row';
         if(row3) row3.style.display = 'table-row';
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: \nCore 3: ";
     } else {
         if(row1) row1.style.display = 'none';
         if(row2) row2.style.display = 'none';
         if(row3) row3.style.display = 'none';
+        if(remarkBox) remarkBox.value = "";
     }
 }
 
@@ -828,16 +847,32 @@ function formatDate(dateString) {
     return dateString;
 }
 
+/* HELPER TO FILTER OUT EMPTY CORE LINES FROM REMARKS */
+function formatRemark(remark) {
+    if (!remark) return "";
+    let lines = remark.split('\n');
+    let validLines = lines.filter(function(line) {
+        let trimmed = line.trim();
+        // Hide lines matching "Core 1:", "Core 2:", "Core 3:", etc., if no text follows
+        if (/^Core\s*\d+\s*:\s*$/i.test(trimmed)) {
+            return false;
+        }
+        return trimmed !== "";
+    });
+    return validLines.join('\n').trim();
+}
+
 function addPreview(title, serial, specLabel, specValue, tests, remark){
     if (!serial || serial.trim() === "" || !specValue || specValue.trim() === "") {
         return "";
     }
 
-    let activeTests = tests.filter(function(t) {
-        return t[1] !== null;
+    /* ALL tests in the section must have a status selected */
+    let hasUnselectedTest = tests.some(function(t) {
+        return t[1] === null;
     });
 
-    if (activeTests.length === 0 && (!remark || remark.trim() === "")) {
+    if (hasUnselectedTest) {
         return "";
     }
 
@@ -846,7 +881,7 @@ function addPreview(title, serial, specLabel, specValue, tests, remark){
     output += specLabel + ": " + specValue + "\n";
     output += "Serial No: " + serial.trim() + "\n\n";
 
-    activeTests.forEach(function(t){
+    tests.forEach(function(t){
         let testName = t[0];
         let status = t[1];
         let icon = "❌";
@@ -860,8 +895,9 @@ function addPreview(title, serial, specLabel, specValue, tests, remark){
         output += "• " + testName + ": " + status + " " + icon + "\n";
     });
 
-    if (remark && remark.trim() !== "") {
-        output += "\n📝 *Remarks:* " + remark.trim() + "\n";
+    let cleanRemark = formatRemark(remark);
+    if (cleanRemark !== "") {
+        output += "\n📝 *Remarks:*\n" + cleanRemark + "\n";
     }
 
     output += "\n--------------------------\n\n";
