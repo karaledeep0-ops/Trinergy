@@ -27,7 +27,6 @@ body{
     padding:10px;
 }
 
-/* HEADER MOBILE IMPROVED */
 .header{
     display:flex;
     flex-wrap:wrap;
@@ -66,7 +65,6 @@ body{
     outline:none;
 }
 
-/* FIELDSET */
 fieldset{
     margin-top:15px;
     border:2px solid #005A9C;
@@ -97,7 +95,6 @@ legend{
     color: #005A9C;
 }
 
-/* RADIO & ALIGNMENT IMPROVEMENTS */
 .radio-group-container {
     display: flex;
     align-items: center;
@@ -106,7 +103,6 @@ legend{
     flex-wrap: wrap;
 }
 
-/* UPS TYPE LABEL REGULAR FONT (NOT BOLD) */
 .radio-label {
     font-weight: normal;
     font-size: 14px;
@@ -127,13 +123,11 @@ input[type=radio]{
     cursor: pointer;
 }
 
-/* INPUT */
 input[type=text]{
     width:100%;
     padding:10px;
 }
 
-/* TABLE MOBILE */
 table{
     width:100%;
     border-collapse:collapse;
@@ -157,7 +151,6 @@ td{
 
 th:first-child,td:first-child{width:40%;text-align:left;}
 
-/* STATUS BUTTONS */
 .status-btn {
     font-size: 14px;
     font-weight: bold;
@@ -178,7 +171,6 @@ th:first-child,td:first-child{width:40%;text-align:left;}
     border-color: #005A9C;
 }
 
-/* REMARK SPACING FIX */
 textarea{
     width:100%;
     height:90px;
@@ -198,7 +190,6 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(0, 90, 156, 0.3);
 }
 
-/* ACTION BUTTONS */
 .action-btn {
     width:90%;
     padding:14px;
@@ -225,7 +216,6 @@ textarea:focus {
     display: inline-block;
 }
 
-/* PREVIEW BOX */
 #previewBox {
     margin-top: 20px;
     padding: 15px;
@@ -235,7 +225,6 @@ textarea:focus {
     white-space: pre-wrap;
 }
 
-/* SMALL MOBILE SCREEN */
 @media(max-width:600px){
     body{ padding:5px; }
     .header{ flex-direction:column; text-align:center; }
@@ -679,7 +668,6 @@ const statusData = {};
 let lvCount = 1;
 let stsLvCount = 1;
 
-/* RADIO BUTTON TOGGLE/UNSELECT FEATURE */
 function handleRadioToggle(radio, callback) {
     if (radio.wasChecked) {
         radio.checked = false;
@@ -847,13 +835,11 @@ function formatDate(dateString) {
     return dateString;
 }
 
-/* HELPER TO FILTER OUT EMPTY CORE LINES FROM REMARKS */
 function formatRemark(remark) {
     if (!remark) return "";
     let lines = remark.split('\n');
     let validLines = lines.filter(function(line) {
         let trimmed = line.trim();
-        // Hide lines matching "Core 1:", "Core 2:", "Core 3:", etc., if no text follows
         if (/^Core\s*\d+\s*:\s*$/i.test(trimmed)) {
             return false;
         }
@@ -862,17 +848,8 @@ function formatRemark(remark) {
     return validLines.join('\n').trim();
 }
 
-function addPreview(title, serial, specLabel, specValue, tests, remark){
+function addPreview(title, serial, specLabel, specValue, tests, remark, isLv = false){
     if (!serial || serial.trim() === "" || !specValue || specValue.trim() === "") {
-        return "";
-    }
-
-    /* ALL tests in the section must have a status selected */
-    let hasUnselectedTest = tests.some(function(t) {
-        return t[1] === null;
-    });
-
-    if (hasUnselectedTest) {
         return "";
     }
 
@@ -881,19 +858,58 @@ function addPreview(title, serial, specLabel, specValue, tests, remark){
     output += specLabel + ": " + specValue + "\n";
     output += "Serial No: " + serial.trim() + "\n\n";
 
-    tests.forEach(function(t){
-        let testName = t[0];
-        let status = t[1];
-        let icon = "❌";
+    // 1. Check if ALL tests in the section are completed ('Done')
+    let allTestsDone = tests.every(function(t){
+        return t[1] === "Done";
+    });
 
-        if (status === "Done") {
-            icon = "✅";
-        } else if (status === "Running") {
-            icon = "🏃";
+    // Apply "Finishing ✅" ONLY for Test Bays & Heatrun Bays (if isLv is false)
+    if (allTestsDone && !isLv) {
+        output += "• Finishing ✅\n";
+    } else {
+        // 2. Process Booster Cores consolidation if present and not all overall tests are done
+        let processedTests = [];
+        let boosterTests = tests.filter(t => t[0].startsWith("Booster Core"));
+
+        if (boosterTests.length > 0) {
+            let allBoosterDone = boosterTests.every(t => t[1] === "Done");
+            
+            tests.forEach(function(t) {
+                if (t[0].startsWith("Booster Core")) {
+                    if (allBoosterDone) {
+                        if (!processedTests.some(pt => pt[0] === "Booster")) {
+                            processedTests.push(["Booster", "Done"]);
+                        }
+                    } else {
+                        processedTests.push(t);
+                    }
+                } else {
+                    processedTests.push(t);
+                }
+            });
+        } else {
+            processedTests = tests;
         }
 
-        output += "• " + testName + ": " + status + " " + icon + "\n";
-    });
+        // Render tests line by line
+        processedTests.forEach(function(t){
+            let testName = t[0];
+            let status = t[1];
+
+            if (!status) {
+                status = "Not Done";
+            }
+
+            let icon = "❌";
+            if (status === "Done") {
+                icon = "✅";
+            } else if (status === "Running") {
+                icon = "🏃";
+            }
+
+            output += "• " + testName + ": " + status + " " + icon + "\n";
+        });
+    }
 
     let cleanRemark = formatRemark(remark);
     if (cleanRemark !== "") {
@@ -942,7 +958,8 @@ function previewData(){
             "UPS Type",
             upsType,
             testsList,
-            document.getElementById("remark" + bay).value
+            document.getElementById("remark" + bay).value,
+            false // Not LV Status
         );
     });
 
@@ -962,7 +979,8 @@ function previewData(){
             "UPS Type",
             lvType,
             lvTests,
-            lvRemark
+            lvRemark,
+            true // Is LV Status
         );
     }
 
@@ -978,7 +996,8 @@ function previewData(){
             ["Burn In", getStatus("sts1_burn")],
             ["Data Save", getStatus("sts1_save")]
         ],
-        document.getElementById("stsRemark1").value
+        document.getElementById("stsRemark1").value,
+        false // Not LV Status
     );
 
     output += addPreview(
@@ -991,7 +1010,8 @@ function previewData(){
             ["Data Save", getStatus("heat1_save")],
             ["480V/60Hz", getStatus("heat1_480")]
         ],
-        document.getElementById("heatRemark1").value
+        document.getElementById("heatRemark1").value,
+        false // Not LV Status
     );
 
     output += addPreview(
@@ -1006,7 +1026,8 @@ function previewData(){
             ["Burn In", getStatus("sts2_burn")],
             ["Data Save", getStatus("sts2_save")]
         ],
-        document.getElementById("stsRemark2").value
+        document.getElementById("stsRemark2").value,
+        false // Not LV Status
     );
 
     output += addPreview(
@@ -1019,7 +1040,8 @@ function previewData(){
             ["Data Save", getStatus("heat2_save")],
             ["480V/60Hz", getStatus("heat2_480")]
         ],
-        document.getElementById("heatRemark2").value
+        document.getElementById("heatRemark2").value,
+        false // Not LV Status
     );
 
     for (let j = 1; j <= stsLvCount; j++) {
@@ -1038,7 +1060,8 @@ function previewData(){
             "UPS Rating",
             stslvRating,
             stslvTests,
-            stslvRemark
+            stslvRemark,
+            true // Is LV Status
         );
     }
 
@@ -1066,7 +1089,6 @@ function copyClipboard() {
     }
 }
 
-/* NO-KEYBOARD FLASH FALLBACK COPY FUNCTION */
 function fallbackCopyText(text) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
