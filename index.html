@@ -1,1 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAILY TRINERGY STATUS</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f2f5f8;
+    padding:10px;
+}
+
+.container{
+    width:100%;
+    margin:auto;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+    padding:10px;
+}
+
+.header{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    background:#005A9C;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+.header-left{
+    flex:1;
+    text-align:left;
+    min-width: 200px;
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width: auto;
+}
+
+.header-right input[type="date"]{
+    padding:8px;
+    font-size:14px;
+    border-radius:5px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+fieldset{
+    margin-top:15px;
+    border:2px solid #005A9C;
+    border-radius:8px;
+    padding:15px;
+    position:relative;
+    overflow:visible;
+}
+
+legend{
+    font-size:18px;
+    font-weight:bold;
+    color:#005A9C;
+    padding:0 8px;
+    background:#fff;
+    margin-left:10px;
+}
+
+.sub-fieldset {
+    border: 2px dashed #005A9C;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.sub-fieldset legend {
+    font-size: 16px;
+    color: #005A9C;
+}
+
+.radio-group-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    font-weight: normal;
+    font-size: 14px;
+    color: #333;
+}
+
+.radio-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+input[type=radio]{
+    transform:scale(1.2);
+    cursor: pointer;
+}
+
+input[type=text]{
+    width:100%;
+    padding:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    margin-top:15px;
+    font-size:14px;
+}
+
+th{
+    background:#005A9C;
+    color:white;
+    padding:8px;
+}
+
+td{
+    border:1px solid #999;
+    padding:8px;
+    text-align:center;
+    vertical-align:middle;
+}
+
+th:first-child,td:first-child{width:40%;text-align:left;}
+
+.status-btn {
+    font-size: 14px;
+    font-weight: bold;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    width: auto;
+    display: inline-block;
+    margin: 0;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.status-btn.active {
+    background: #005A9C;
+    color: white;
+    border-color: #005A9C;
+}
+
+textarea{
+    width:100%;
+    height:90px;
+    margin-top:8px;
+    padding:12px 14px;
+    font-size:14px;
+    line-height:1.5;
+    letter-spacing: 0.5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    resize: vertical;
+}
+
+textarea:focus {
+    border-color: #005A9C;
+    box-shadow: 0 0 5px rgba(0, 90, 156, 0.3);
+}
+
+.action-btn {
+    width:90%;
+    padding:14px;
+    margin:8px auto;
+    display:block;
+    font-size:16px;
+    background:#005A9C;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.add-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+#previewBox {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef2f5;
+    border-radius: 8px;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+@media(max-width:600px){
+    body{ padding:5px; }
+    .header{ flex-direction:column; text-align:center; }
+    .header-left{ text-align:center; }
+    .header-right{ width:100%; justify-content:center; }
+    .header h1{ font-size:20px; }
+    table{ font-size:12px; }
+    td,th{ padding:6px; }
+    fieldset{ padding:10px; }
+    .status-btn { font-size: 11px; padding: 4px 6px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <div class="header-left"><h1>DAILY TRINERGY STATUS</h1></div>
+    <div class="header-right"><label for="date"><b>Date :</b></label> <input type="date" id="date"></div>
+</div>
+
+<!-- ================= TEST BAY 21 ================= -->
+<fieldset>
+<legend>TEST BAY 21</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups21" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(21))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups21" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(21))"> 3X
+    </label>
+</div>
+
+<label for="serial21">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial21">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b21_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b21_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b21_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b21_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark21">Remarks:</label>
+<textarea id="remark21"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 22 ================= -->
+<fieldset>
+<legend>TEST BAY 22</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups22" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(22))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups22" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(22))"> 3X
+    </label>
+</div>
+
+<label for="serial22">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial22">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b22_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b22_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b22_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b22_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark22">Remarks:</label>
+<textarea id="remark22"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 23 ================= -->
+<fieldset>
+<legend>TEST BAY 23</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups23" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(23))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups23" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(23))"> 3X
+    </label>
+</div>
+
+<label for="serial23">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial23">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b23_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b23_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b23_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b23_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark23">Remarks:</label>
+<textarea id="remark23"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 26 ================= -->
+<fieldset>
+<legend>TEST BAY 26</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups26" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(26))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups26" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(26))"> 3X
+    </label>
+</div>
+
+<label for="serial26">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial26">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b26_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b26_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b26_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b26_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark26">Remarks:</label>
+<textarea id="remark26"></textarea>
+</fieldset>
+
+<!-- ================= TEST BAY 27 ================= -->
+<fieldset>
+<legend>TEST BAY 27</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups27" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(27))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups27" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(27))"> 3X
+    </label>
+</div>
+
+<label for="serial27">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial27">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b27_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b27_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b27_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b27_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark27">Remarks:</label>
+<textarea id="remark27"></textarea>
+</fieldset>
+
+<!-- ================= INDIVIDUAL: LV STATUS FOR CORE ================= -->
+<fieldset>
+<legend>LV STATUS FOR CORE</legend>
+<div id="lvContainer">
+    <fieldset class="sub-fieldset">
+        <legend>LV STATUS FOR CORE #1</legend>
+
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Type:</span>
+            <label class="radio-option">
+                <input type="radio" name="lv_ups_1" value="2X" onclick="handleRadioToggle(this, () => updateLvRemarks(1))"> 2X
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="lv_ups_1" value="3X" onclick="handleRadioToggle(this, () => updateLvRemarks(1))"> 3X
+            </label>
+        </div>
+
+        <label for="lvSerial_1">Unit Serial Number:</label>
+        <br>
+        <input type="text" id="lvSerial_1" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_firmware', 'Not Done')">❌</button></td></tr>
+            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_lv', 'Not Done')">❌</button></td></tr>
+            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_hipot', 'Not Done')">❌</button></td></tr>
+            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv1_offset', 'Not Done')">❌</button></td></tr>
+        </table>
+
+        <br>
+        <label for="lvRemark_1">Remarks:</label>
+        <textarea id="lvRemark_1"></textarea>
+    </fieldset>
+</div>
+
+<button type="button" class="add-btn" onclick="addLvStatus()">+ ADD NEW LV STATUS FOR CORE</button>
+</fieldset>
+
+<!-- ================= STS TEST BAY 1 ================= -->
+<fieldset>
+<legend>STS TEST BAY 1</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Rating:</span>
+    <label class="radio-option">
+        <input type="radio" name="sts_rating1" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="sts_rating1" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+    </label>
+</div>
+
+<label for="stsSerial1">Unit Serial Number:</label>
+<br>
+<input type="text" id="stsSerial1">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Current Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_current', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_current', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_burn', 'RUNNING')">🏃</button></td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts1_save', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="stsRemark1">Remarks:</label>
+<textarea id="stsRemark1"></textarea>
+</fieldset>
+
+<!-- ================= STS HEATRUN TEST BAY 1 ================= -->
+<fieldset>
+<legend>STS HEATRUN TEST BAY 1</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Rating:</span>
+    <label class="radio-option">
+        <input type="radio" name="heat_rating1" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="heat_rating1" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+    </label>
+</div>
+
+<label for="heatSerial1">Unit Serial Number:</label>
+<br>
+<input type="text" id="heatSerial1">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_burn', 'RUNNING')">🏃</button></td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat1_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="heatRemark1">Remarks:</label>
+<textarea id="heatRemark1"></textarea>
+</fieldset>
+
+<!-- ================= STS TEST BAY 2 ================= -->
+<fieldset>
+<legend>STS TEST BAY 2</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Rating:</span>
+    <label class="radio-option">
+        <input type="radio" name="sts2_rating" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="sts2_rating" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+    </label>
+</div>
+
+<label for="stsSerial2">Unit Serial Number:</label>
+<br>
+<input type="text" id="stsSerial2">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Current Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_current', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_current', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_burn', 'RUNNING')">🏃</button></td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'sts2_save', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="stsRemark2">Remarks:</label>
+<textarea id="stsRemark2"></textarea>
+</fieldset>
+
+<!-- ================= STS HEATRUN TEST BAY 2 ================= -->
+<fieldset>
+<legend>STS HEATRUN TEST BAY 2</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Rating:</span>
+    <label class="radio-option">
+        <input type="radio" name="heat2_rating" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="heat2_rating" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+    </label>
+</div>
+
+<label for="heatSerial2">Unit Serial Number:</label>
+<br>
+<input type="text" id="heatSerial2">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_burn', 'RUNNING')">🏃</button></td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'heat2_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="heatRemark2">Remarks:</label>
+<textarea id="heatRemark2"></textarea>
+</fieldset>
+
+<!-- ================= INDIVIDUAL: LV STATUS FOR STS ================= -->
+<fieldset>
+<legend>LV STATUS FOR STS</legend>
+<div id="stslvContainer">
+    <fieldset class="sub-fieldset">
+        <legend>LV STATUS FOR STS #1</legend>
+
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Rating:</span>
+            <label class="radio-option">
+                <input type="radio" name="stslv_rating_1" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="stslv_rating_1" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+            </label>
+        </div>
+
+        <label for="stslvSerial_1">Unit Serial Number:</label>
+        <br>
+        <input type="text" id="stslvSerial_1" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_firmware', 'Not Done')">❌</button></td></tr>
+            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_lv', 'Not Done')">❌</button></td></tr>
+            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_hipot', 'Not Done')">❌</button></td></tr>
+            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv1_offset', 'Not Done')">❌</button></td></tr>
+        </table>
+
+        <br>
+        <label for="stslvRemark_1">Remarks:</label>
+        <textarea id="stslvRemark_1"></textarea>
+    </fieldset>
+</div>
+
+<button type="button" class="add-btn" onclick="addStsLvStatus()">+ ADD NEW LV STATUS FOR STS</button>
+</fieldset>
+
+<br><br>
+
+<button type="button" class="action-btn" onclick="previewData()">PREVIEW</button>
+<button type="button" class="action-btn" onclick="copyClipboard()">COPY TO CLIPBOARD</button>
+
+<div id="previewBox"></div>
+
+</div>
+
+<script>
+const statusData = {};
+let lvCount = 1;
+let stsLvCount = 1;
+
+function handleRadioToggle(radio, callback) {
+    if (radio.wasChecked) {
+        radio.checked = false;
+        radio.wasChecked = false;
+    } else {
+        const name = radio.name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(el => el.wasChecked = false);
+        radio.wasChecked = true;
+    }
+    if (callback) callback();
+}
+
+function setStatus(btn, key, value) {
+    const parentTd = btn.parentElement;
+    const parentTr = parentTd.parentElement;
+    
+    if (statusData[key] === value) {
+        delete statusData[key];
+        btn.classList.remove("active");
+    } else {
+        statusData[key] = value;
+        const buttons = parentTr.querySelectorAll(".status-btn");
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+    }
+}
+
+function updateLvRemarks(index) {
+    const type = getRadio('lv_ups_' + index);
+    const remarkBox = document.getElementById('lvRemark_' + index);
+
+    if (type === '2X') {
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: ";
+    } else if (type === '3X') {
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: \nCore 3: ";
+    } else {
+        if(remarkBox) remarkBox.value = "";
+    }
+}
+
+function addLvStatus() {
+    lvCount++;
+    const container = document.getElementById('lvContainer');
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'sub-fieldset';
+    fieldset.id = 'lv_fieldset_' + lvCount;
+    
+    const currentCount = lvCount;
+    
+    fieldset.innerHTML = `
+        <legend>LV STATUS FOR CORE #${currentCount}</legend>
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Type:</span>
+            <label class="radio-option">
+                <input type="radio" name="lv_ups_${currentCount}" value="2X" onclick="handleRadioToggle(this, () => updateLvRemarks(${currentCount}))"> 2X
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="lv_ups_${currentCount}" value="3X" onclick="handleRadioToggle(this, () => updateLvRemarks(${currentCount}))"> 3X
+            </label>
+        </div>
+
+        <label for="lvSerial_${currentCount}">Unit Serial Number:</label>
+        <br>
+        <input type="text" id="lvSerial_${currentCount}" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_firmware', 'Not Done')">❌</button></td></tr>
+            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_lv', 'Not Done')">❌</button></td></tr>
+            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_hipot', 'Not Done')">❌</button></td></tr>
+            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'lv${currentCount}_offset', 'Not Done')">❌</button></td></tr>
+        </table>
+
+        <br>
+        <label for="lvRemark_${currentCount}">Remarks:</label>
+        <textarea id="lvRemark_${currentCount}"></textarea>
+    `;
+    container.appendChild(fieldset);
+}
+
+function addStsLvStatus() {
+    stsLvCount++;
+    const container = document.getElementById('stslvContainer');
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'sub-fieldset';
+    fieldset.id = 'stslv_fieldset_' + stsLvCount;
+    
+    fieldset.innerHTML = `
+        <legend>LV STATUS FOR STS #${stsLvCount}</legend>
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Rating:</span>
+            <label class="radio-option">
+                <input type="radio" name="stslv_rating_${stsLvCount}" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="stslv_rating_${stsLvCount}" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+            </label>
+        </div>
+
+        <label for="stslvSerial_${stsLvCount}">Unit Serial Number:</label>
+        <br>
+        <input type="text" id="stslvSerial_${stsLvCount}" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th></tr>
+            <tr><td>Firmware</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_firmware', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_firmware', 'Not Done')">❌</button></td></tr>
+            <tr><td>L.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_lv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_lv', 'Not Done')">❌</button></td></tr>
+            <tr><td>Hipot</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_hipot', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_hipot', 'Not Done')">❌</button></td></tr>
+            <tr><td>Offset Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_offset', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stslv${stsLvCount}_offset', 'Not Done')">❌</button></td></tr>
+        </table>
+
+        <br>
+        <label for="stslvRemark_${stsLvCount}">Remarks:</label>
+        <textarea id="stslvRemark_${stsLvCount}"></textarea>
+    `;
+    container.appendChild(fieldset);
+}
+
+function updateBoosterRows(bay) {
+    const type = getRadio('ups' + bay);
+    const row1 = document.getElementById('b' + bay + '_booster_c1_row');
+    const row2 = document.getElementById('b' + bay + '_booster_c2_row');
+    const row3 = document.getElementById('b' + bay + '_booster_c3_row');
+    const remarkBox = document.getElementById('remark' + bay);
+
+    if (type === '2X') {
+        if(row1) row1.style.display = 'table-row';
+        if(row2) row2.style.display = 'table-row';
+        if(row3) row3.style.display = 'none';
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: ";
+    } else if (type === '3X') {
+        if(row1) row1.style.display = 'table-row';
+        if(row2) row2.style.display = 'table-row';
+        if(row3) row3.style.display = 'table-row';
+        if(remarkBox) remarkBox.value = "Core 1: \nCore 2: \nCore 3: ";
+    } else {
+        if(row1) row1.style.display = 'none';
+        if(row2) row2.style.display = 'none';
+        if(row3) row3.style.display = 'none';
+        if(remarkBox) remarkBox.value = "";
+    }
+}
+
+function getRadio(name){
+    let x = document.querySelector('input[name="'+name+'"]:checked');
+    return x ? x.value : "";
+}
+
+function getStatus(key){
+    const val = statusData[key];
+    if (!val) return null;
+    if (val === 'Done' || val === 'COMPLETED') return 'Done';
+    if (val === 'RUNNING') return 'Running';
+    return 'Not Done';
+}
+
+function formatDate(dateString) {
+    if(!dateString) return "";
+    let parts = dateString.split("-");
+    if(parts.length === 3) {
+        return parts[2] + "-" + parts[1] + "-" + parts[0];
+    }
+    return dateString;
+}
+
+function formatRemark(remark) {
+    if (!remark) return "";
+    let lines = remark.split('\n');
+    let validLines = lines.filter(function(line) {
+        let trimmed = line.trim();
+        if (/^Core\s*\d+\s*:\s*$/i.test(trimmed)) {
+            return false;
+        }
+        return trimmed !== "";
+    });
+    return validLines.join('\n').trim();
+}
+
+function addPreview(title, serial, specLabel, specValue, tests, remark, isLv = false){
+    if (!serial || serial.trim() === "" || !specValue || specValue.trim() === "") {
+        return "";
+    }
+
+    let output = "";
+    output += "📌 *" + title + "*\n\n";
+    output += specLabel + ": " + specValue + "\n";
+    output += "Serial No: " + serial.trim() + "\n\n";
+
+    // 1. Check if ALL tests in the section are completed ('Done')
+    let allTestsDone = tests.every(function(t){
+        return t[1] === "Done";
+    });
+
+    // Apply "Finishing ✅" ONLY for Test Bays & Heatrun Bays (if isLv is false)
+    if (allTestsDone && !isLv) {
+        output += "• Finishing ✅\n";
+    } else {
+        // 2. Process Booster Cores consolidation if present and not all overall tests are done
+        let processedTests = [];
+        let boosterTests = tests.filter(t => t[0].startsWith("Booster Core"));
+
+        if (boosterTests.length > 0) {
+            let allBoosterDone = boosterTests.every(t => t[1] === "Done");
+            
+            tests.forEach(function(t) {
+                if (t[0].startsWith("Booster Core")) {
+                    if (allBoosterDone) {
+                        if (!processedTests.some(pt => pt[0] === "Booster")) {
+                            processedTests.push(["Booster", "Done"]);
+                        }
+                    } else {
+                        processedTests.push(t);
+                    }
+                } else {
+                    processedTests.push(t);
+                }
+            });
+        } else {
+            processedTests = tests;
+        }
+
+        // Render tests line by line
+        processedTests.forEach(function(t){
+            let testName = t[0];
+            let status = t[1];
+
+            if (!status) {
+                status = "Not Done";
+            }
+
+            let icon = "❌";
+            if (status === "Done") {
+                icon = "✅";
+            } else if (status === "Running") {
+                icon = "🏃";
+            }
+
+            output += "• " + testName + ": " + status + " " + icon + "\n";
+        });
+    }
+
+    let cleanRemark = formatRemark(remark);
+    if (cleanRemark !== "") {
+        output += "\n📝 *Remarks:*\n" + cleanRemark + "\n";
+    }
+
+    output += "\n--------------------------\n\n";
+    return output;
+}
+
+function previewData(){
+    let rawDate = document.getElementById("date").value;
+    let formattedDate = formatDate(rawDate);
+
+    let output = "*DAILY TRINERGY STATUS*\n";
+    output += "*Date:* " + (formattedDate || "N/A") + "\n\n";
+
+    let bays = [21, 22, 23, 26, 27];
+    bays.forEach(function(bay){
+        let upsType = getRadio("ups" + bay);
+        let testsList = [
+            ["H.V.", getStatus("b" + bay + "_hv")],
+            ["Full Load", getStatus("b" + bay + "_full")],
+            ["Voltage Cal.", getStatus("b" + bay + "_voltage")],
+            ["Performance", getStatus("b" + bay + "_perf")],
+            ["Short Ckt.", getStatus("b" + bay + "_short")],
+            ["Burn In", getStatus("b" + bay + "_burn")]
+        ];
+
+        if (upsType === "2X") {
+            testsList.push(["Booster Core 1", getStatus("b" + bay + "_booster_c1")]);
+            testsList.push(["Booster Core 2", getStatus("b" + bay + "_booster_c2")]);
+        } else if (upsType === "3X") {
+            testsList.push(["Booster Core 1", getStatus("b" + bay + "_booster_c1")]);
+            testsList.push(["Booster Core 2", getStatus("b" + bay + "_booster_c2")]);
+            testsList.push(["Booster Core 3", getStatus("b" + bay + "_booster_c3")]);
+        }
+
+        testsList.push(["DC Component", getStatus("b" + bay + "_dc")]);
+        testsList.push(["Data Save", getStatus("b" + bay + "_save")]);
+        testsList.push(["480V/60Hz", getStatus("b" + bay + "_480")]);
+
+        output += addPreview(
+            "TEST BAY " + bay,
+            document.getElementById("serial" + bay).value,
+            "UPS Type",
+            upsType,
+            testsList,
+            document.getElementById("remark" + bay).value,
+            false // Not LV Status
+        );
+    });
+
+    for (let i = 1; i <= lvCount; i++) {
+        let lvType = getRadio("lv_ups_" + i);
+        let lvSerial = document.getElementById("lvSerial_" + i) ? document.getElementById("lvSerial_" + i).value : "";
+        let lvRemark = document.getElementById("lvRemark_" + i) ? document.getElementById("lvRemark_" + i).value : "";
+        let lvTests = [
+            ["Firmware", getStatus("lv" + i + "_firmware")],
+            ["L.V.", getStatus("lv" + i + "_lv")],
+            ["Hipot", getStatus("lv" + i + "_hipot")],
+            ["Offset Cal.", getStatus("lv" + i + "_offset")]
+        ];
+        output += addPreview(
+            "LV STATUS FOR CORE #" + i,
+            lvSerial,
+            "UPS Type",
+            lvType,
+            lvTests,
+            lvRemark,
+            true // Is LV Status
+        );
+    }
+
+    output += addPreview(
+        "STS TEST BAY 1",
+        document.getElementById("stsSerial1").value,
+        "UPS Rating",
+        getRadio("sts_rating1"),
+        [
+            ["Voltage Cal.", getStatus("sts1_voltage")],
+            ["Current Cal.", getStatus("sts1_current")],
+            ["Performance", getStatus("sts1_perf")],
+            ["Burn In", getStatus("sts1_burn")],
+            ["Data Save", getStatus("sts1_save")]
+        ],
+        document.getElementById("stsRemark1").value,
+        false // Not LV Status
+    );
+
+    output += addPreview(
+        "STS HEATRUN TEST BAY 1",
+        document.getElementById("heatSerial1").value,
+        "UPS Rating",
+        getRadio("heat_rating1"),
+        [
+            ["Burn In", getStatus("heat1_burn")],
+            ["Data Save", getStatus("heat1_save")],
+            ["480V/60Hz", getStatus("heat1_480")]
+        ],
+        document.getElementById("heatRemark1").value,
+        false // Not LV Status
+    );
+
+    output += addPreview(
+        "STS TEST BAY 2",
+        document.getElementById("stsSerial2").value,
+        "UPS Rating",
+        getRadio("sts2_rating"),
+        [
+            ["Voltage Cal.", getStatus("sts2_voltage")],
+            ["Current Cal.", getStatus("sts2_current")],
+            ["Performance", getStatus("sts2_perf")],
+            ["Burn In", getStatus("sts2_burn")],
+            ["Data Save", getStatus("sts2_save")]
+        ],
+        document.getElementById("stsRemark2").value,
+        false // Not LV Status
+    );
+
+    output += addPreview(
+        "STS HEATRUN TEST BAY 2",
+        document.getElementById("heatSerial2").value,
+        "UPS Rating",
+        getRadio("heat2_rating"),
+        [
+            ["Burn In", getStatus("heat2_burn")],
+            ["Data Save", getStatus("heat2_save")],
+            ["480V/60Hz", getStatus("heat2_480")]
+        ],
+        document.getElementById("heatRemark2").value,
+        false // Not LV Status
+    );
+
+    for (let j = 1; j <= stsLvCount; j++) {
+        let stslvRating = getRadio("stslv_rating_" + j);
+        let stslvSerial = document.getElementById("stslvSerial_" + j) ? document.getElementById("stslvSerial_" + j).value : "";
+        let stslvRemark = document.getElementById("stslvRemark_" + j) ? document.getElementById("stslvRemark_" + j).value : "";
+        let stslvTests = [
+            ["Firmware", getStatus("stslv" + j + "_firmware")],
+            ["L.V.", getStatus("stslv" + j + "_lv")],
+            ["Hipot", getStatus("stslv" + j + "_hipot")],
+            ["Offset Cal.", getStatus("stslv" + j + "_offset")]
+        ];
+        output += addPreview(
+            "LV STATUS FOR STS #" + j,
+            stslvSerial,
+            "UPS Rating",
+            stslvRating,
+            stslvTests,
+            stslvRemark,
+            true // Is LV Status
+        );
+    }
+
+    document.getElementById("previewBox").innerText = output;
+}
+
+function copyClipboard() {
+    previewData();
+
+    const text = document.getElementById("previewBox").innerText;
+    
+    if (!text || text.trim() === "" || text.trim() === "*DAILY TRINERGY STATUS*\n*Date:* N/A") {
+        alert("Nothing to Copy! Please Enter Data First.");
+        return;
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Copied Daily Trinergy Status to Clipboard.");
+        }).catch(() => {
+            fallbackCopyText(text);
+        });
+    } else {
+        fallbackCopyText(text);
+    }
+}
+
+function fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    textArea.setAttribute("readonly", "");
+    textArea.setAttribute("inputmode", "none");
+    
+    textArea.style.position = "absolute";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+
+    document.body.appendChild(textArea);
+    
+    textArea.focus({ preventScroll: true });
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            alert("Copied Daily Trinergy Status to Clipboard.");
+        } else {
+            alert("Unable to copy automatically. Please select text manually.");
+        }
+    } catch (err) {
+        alert("Unable to copy. Please select text manually.");
+    }
+
+    document.body.removeChild(textArea);
+}
+</script>
+
+</body>
+</html>
