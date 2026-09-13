@@ -448,6 +448,46 @@ textarea:focus {
 <textarea id="remark27"></textarea>
 </fieldset>
 
+<!-- ================= TEST BAY 28 ================= -->
+<fieldset>
+<legend>TEST BAY 28</legend>
+
+<div class="radio-group-container">
+    <span class="radio-label">UPS Type:</span>
+    <label class="radio-option">
+        <input type="radio" name="ups28" value="2X" onclick="handleRadioToggle(this, () => updateBoosterRows(28))"> 2X
+    </label>
+    <label class="radio-option">
+        <input type="radio" name="ups28" value="3X" onclick="handleRadioToggle(this, () => updateBoosterRows(28))"> 3X
+    </label>
+</div>
+
+<label for="serial28">Unit Serial Number:</label>
+<br>
+<input type="text" id="serial28">
+<br><br>
+
+<table>
+<tr><th>TEST NAME</th><th>DONE</th><th>NOT DONE</th><th>RUNNING</th></tr>
+<tr><td>H.V.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_hv', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_hv', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Full Load</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_full', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_full', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Voltage Cal.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_voltage', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_voltage', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Performance</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_perf', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_perf', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Short Ckt.</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_short', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_short', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Burn In</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_burn', 'COMPLETED')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_burn', 'Not Done')">❌</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_burn', 'RUNNING')">🏃</button></td></tr>
+<tr id="b28_booster_c1_row" style="display:none;"><td>Booster Core 1</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c1', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c1', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b28_booster_c2_row" style="display:none;"><td>Booster Core 2</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c2', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c2', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr id="b28_booster_c3_row" style="display:none;"><td>Booster Core 3</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c3', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_booster_c3', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>DC Component</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_dc', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_dc', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>Data Save</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_save', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_save', 'Not Done')">❌</button></td><td>-</td></tr>
+<tr><td>480V/60Hz</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_480', 'Done')">✅</button></td><td><button type="button" class="status-btn" onclick="setStatus(this, 'b28_480', 'Not Done')">❌</button></td><td>-</td></tr>
+</table>
+
+<br>
+<label for="remark28">Remarks:</label>
+<textarea id="remark28"></textarea>
+</fieldset>
+
 <!-- ================= INDIVIDUAL: LV STATUS FOR CORE ================= -->
 <fieldset>
 <legend>LV STATUS FOR CORE</legend>
@@ -927,7 +967,7 @@ function previewData(){
     let output = "*DAILY TRINERGY STATUS*\n";
     output += "*Date:* " + (formattedDate || "N/A") + "\n\n";
 
-    let bays = [21, 22, 23, 26, 27];
+    let bays = [21, 22, 23, 26, 27, 28];
     bays.forEach(function(bay){
         let upsType = getRadio("ups" + bay);
         let testsList = [
