@@ -6,25 +6,39 @@
 <title>DAILY TRINERGY STATUS</title>
 
 <style>
+:root {
+    --primary: #005A9C;
+    --primary-dark: #004070;
+    --success: #28a745;
+    --whatsapp: #25D366;
+    --bg-color: #f4f7fa;
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;
+    --border-color: #d1d8e0;
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body{
-    background:#f2f5f8;
-    padding:10px;
+    background: var(--bg-color);
+    color: var(--text-main);
+    padding: 16px;
+    line-height: 1.5;
 }
 
 .container{
-    width:100%;
-    margin:auto;
-    background:white;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.2);
-    padding:10px;
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: 20px;
 }
 
 .header{
@@ -32,12 +46,13 @@ body{
     flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
-    background:#005A9C;
+    gap:15px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color:white;
-    padding:15px;
-    border-radius:8px;
-    margin-bottom:15px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,90,156,0.2);
 }
 
 .header-left{
@@ -47,205 +62,332 @@ body{
 }
 
 .header h1{
-    font-size:22px;
+    font-size:24px;
+    letter-spacing: 0.5px;
 }
 
 .header-right{
     display:flex;
     align-items:center;
-    gap:8px;
-    width: auto;
+    gap:10px;
+}
+
+.header-right label {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .header-right input[type="date"]{
-    padding:8px;
+    padding:8px 12px;
     font-size:14px;
-    border-radius:5px;
-    border:1px solid #ccc;
+    border-radius:6px;
+    border:1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.9);
     outline:none;
+    color: #333;
 }
 
 fieldset{
-    margin-top:15px;
-    border:2px solid #005A9C;
-    border-radius:8px;
-    padding:15px;
-    position:relative;
-    overflow:visible;
+    margin-top: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    background: #fff;
 }
 
 legend{
-    font-size:18px;
-    font-weight:bold;
-    color:#005A9C;
-    padding:0 8px;
-    background:#fff;
-    margin-left:10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 10px;
+    background: #fff;
+    margin-left: 12px;
+    letter-spacing: 0.3px;
 }
 
 .sub-fieldset {
-    border: 2px dashed #005A9C;
+    border: 2px dashed #90caf9;
     margin-top: 15px;
     padding: 15px;
-    border-radius: 6px;
+    border-radius: 8px;
+    background: #fafbfc;
 }
 
 .sub-fieldset legend {
-    font-size: 16px;
-    color: #005A9C;
+    font-size: 14px;
+    color: var(--primary-dark);
+    background: #fafbfc;
 }
 
 .radio-group-container {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
 .radio-label {
-    font-weight: normal;
+    font-weight: 600;
     font-size: 14px;
-    color: #333;
+    color: var(--text-main);
 }
 
 .radio-option {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
-    font-weight: normal;
     font-size: 14px;
+    user-select: none;
 }
 
 input[type=radio]{
-    transform:scale(1.2);
+    transform: scale(1.1);
+    accent-color: var(--primary);
     cursor: pointer;
 }
 
+label[for^="serial"], label[for^="lvSerial"], label[for^="stsSerial"], label[for^="heatSerial"], label[for^="stslvSerial"], label[for^="stsFinishingSerial"], label[for^="coreFinishingSerial"] {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b6584;
+}
+
 input[type=text]{
-    width:100%;
-    padding:10px;
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-top: 6px;
+}
+
+input[type=text]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.15);
 }
 
 table{
     width:100%;
     border-collapse:collapse;
     table-layout:fixed;
-    margin-top:15px;
-    font-size:14px;
+    margin-top: 15px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 th{
-    background:#005A9C;
+    background: var(--primary);
     color:white;
-    padding:8px;
+    padding: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 td{
-    border:1px solid #999;
-    padding:8px;
+    border: 1px solid var(--border-color);
+    padding: 8px;
     text-align:center;
     vertical-align:middle;
 }
 
-th:first-child,td:first-child{width:40%;text-align:left;}
+th:first-child, td:first-child{
+    width: 44%;
+    text-align: left;
+    padding-left: 12px;
+    font-weight: 500;
+}
 
 .status-btn {
     font-size: 14px;
     font-weight: bold;
-    background: transparent;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px 10px;
+    background: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 12px;
     cursor: pointer;
     width: auto;
     display: inline-block;
     margin: 0;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition: all 0.2s ease;
+}
+
+.status-btn:hover {
+    background: #e9ecef;
 }
 
 .status-btn.active {
-    background: #005A9C;
+    background: var(--primary);
     color: white;
-    border-color: #005A9C;
+    border-color: var(--primary);
+    box-shadow: 0 2px 5px rgba(0,90,156,0.2);
 }
 
 textarea{
     width:100%;
-    height:90px;
-    margin-top:8px;
-    padding:12px 14px;
-    font-size:14px;
-    line-height:1.5;
-    letter-spacing: 0.5px;
-    border: 1px solid #ccc;
+    height: 85px;
+    margin-top: 8px;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     outline: none;
     resize: vertical;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 textarea:focus {
-    border-color: #005A9C;
-    box-shadow: 0 0 5px rgba(0, 90, 156, 0.3);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.15);
 }
 
 .action-btn {
-    width:90%;
-    padding:14px;
-    margin:8px auto;
-    display:block;
-    font-size:16px;
-    background:#005A9C;
-    color:white;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s ease, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0,90,156,0.2);
+}
+
+.action-btn:hover {
+    background: var(--primary-dark);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
+.whatsapp-btn {
+    background: var(--whatsapp);
+    box-shadow: 0 4px 10px rgba(37,211,102,0.25);
+}
+
+.whatsapp-btn:hover {
+    background: #1ebd59;
 }
 
 .add-btn {
-    background: #28a745;
+    background: var(--success);
     color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
     display: inline-block;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 6px rgba(40,167,69,0.2);
+}
+
+.add-btn:hover {
+    background: #218838;
 }
 
 #previewBox {
-    margin-top: 20px;
-    padding: 15px;
-    background: #eef2f5;
+    margin-top: 25px;
+    padding: 16px;
+    background: #f8f9fa;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-family: monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
     white-space: pre-wrap;
+    color: #2d3436;
+}
+
+/* Smooth Loading Overlay */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#loadingOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top: 5px solid var(--whatsapp);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+    color: white;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @media(max-width:600px){
-    body{ padding:5px; }
-    .header{ flex-direction:column; text-align:center; }
+    body{ padding: 8px; }
+    .container{ padding: 12px; }
+    .header{ flex-direction:column; text-align:center; padding: 15px; }
     .header-left{ text-align:center; }
     .header-right{ width:100%; justify-content:center; }
     .header h1{ font-size:20px; }
     table{ font-size:12px; }
-    td,th{ padding:6px; }
-    fieldset{ padding:10px; }
-    .status-btn { font-size: 11px; padding: 4px 6px; }
+    td,th{ padding:6px 4px; }
+    fieldset{ padding: 12px; }
+    .status-btn { font-size: 12px; padding: 5px 8px; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- Smooth Loading Overlay -->
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Opening WhatsApp...</div>
+</div>
+
 <div class="container">
 
 <div class="header">
     <div class="header-left"><h1>DAILY TRINERGY STATUS</h1></div>
-    <div class="header-right"><label for="date"><b>Date :</b></label> <input type="date" id="date"></div>
+    <div class="header-right"><label for="date">Date :</label> <input type="date" id="date"></div>
 </div>
 
 <!-- ================= TEST BAY 21 ================= -->
@@ -263,7 +405,6 @@ textarea:focus {
 </div>
 
 <label for="serial21">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial21">
 <br><br>
 
@@ -303,7 +444,6 @@ textarea:focus {
 </div>
 
 <label for="serial22">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial22">
 <br><br>
 
@@ -343,7 +483,6 @@ textarea:focus {
 </div>
 
 <label for="serial23">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial23">
 <br><br>
 
@@ -383,7 +522,6 @@ textarea:focus {
 </div>
 
 <label for="serial26">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial26">
 <br><br>
 
@@ -423,7 +561,6 @@ textarea:focus {
 </div>
 
 <label for="serial27">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial27">
 <br><br>
 
@@ -463,7 +600,6 @@ textarea:focus {
 </div>
 
 <label for="serial28">Unit Serial Number:</label>
-<br>
 <input type="text" id="serial28">
 <br><br>
 
@@ -506,7 +642,6 @@ textarea:focus {
         </div>
 
         <label for="lvSerial_1">Unit Serial Number:</label>
-        <br>
         <input type="text" id="lvSerial_1" class="lv-serial">
         <br><br>
 
@@ -527,6 +662,41 @@ textarea:focus {
 <button type="button" class="add-btn" onclick="addLvStatus()">+ ADD NEW LV STATUS FOR CORE</button>
 </fieldset>
 
+<!-- ================= FINISHING STATUS FOR CORE ================= -->
+<fieldset>
+<legend>FINISHING STATUS FOR CORE</legend>
+<div id="coreFinishingContainer">
+    <fieldset class="sub-fieldset">
+        <legend>FINISHING STATUS FOR CORE #1</legend>
+
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Type:</span>
+            <label class="radio-option">
+                <input type="radio" name="coreFinishing_ups_1" value="2X" onclick="handleRadioToggle(this)"> 2X
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="coreFinishing_ups_1" value="3X" onclick="handleRadioToggle(this)"> 3X
+            </label>
+        </div>
+
+        <label for="coreFinishingSerial_1">Unit Serial Number:</label>
+        <input type="text" id="coreFinishingSerial_1" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th></tr>
+            <tr><td>Finishing</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'coreFinishing1_status', 'Done')">✅</button></td></tr>
+        </table>
+
+        <br>
+        <label for="coreFinishingRemark_1">Remarks:</label>
+        <textarea id="coreFinishingRemark_1"></textarea>
+    </fieldset>
+</div>
+
+<button type="button" class="add-btn" onclick="addCoreFinishingStatus()">+ ADD NEW FINISHING STATUS FOR CORE</button>
+</fieldset>
+
 <!-- ================= STS TEST BAY 1 ================= -->
 <fieldset>
 <legend>STS TEST BAY 1</legend>
@@ -542,7 +712,6 @@ textarea:focus {
 </div>
 
 <label for="stsSerial1">Unit Serial Number:</label>
-<br>
 <input type="text" id="stsSerial1">
 <br><br>
 
@@ -575,7 +744,6 @@ textarea:focus {
 </div>
 
 <label for="heatSerial1">Unit Serial Number:</label>
-<br>
 <input type="text" id="heatSerial1">
 <br><br>
 
@@ -606,7 +774,6 @@ textarea:focus {
 </div>
 
 <label for="stsSerial2">Unit Serial Number:</label>
-<br>
 <input type="text" id="stsSerial2">
 <br><br>
 
@@ -639,7 +806,6 @@ textarea:focus {
 </div>
 
 <label for="heatSerial2">Unit Serial Number:</label>
-<br>
 <input type="text" id="heatSerial2">
 <br><br>
 
@@ -673,7 +839,6 @@ textarea:focus {
         </div>
 
         <label for="stslvSerial_1">Unit Serial Number:</label>
-        <br>
         <input type="text" id="stslvSerial_1" class="lv-serial">
         <br><br>
 
@@ -694,10 +859,46 @@ textarea:focus {
 <button type="button" class="add-btn" onclick="addStsLvStatus()">+ ADD NEW LV STATUS FOR STS</button>
 </fieldset>
 
-<br><br>
+<!-- ================= FINISHING STATUS FOR STS ================= -->
+<fieldset>
+<legend>FINISHING STATUS FOR STS</legend>
+<div id="stsFinishingContainer">
+    <fieldset class="sub-fieldset">
+        <legend>FINISHING STATUS FOR STS #1</legend>
+
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Rating:</span>
+            <label class="radio-option">
+                <input type="radio" name="stsFinishing_rating_1" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="stsFinishing_rating_1" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+            </label>
+        </div>
+
+        <label for="stsFinishingSerial_1">Unit Serial Number:</label>
+        <input type="text" id="stsFinishingSerial_1" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th></tr>
+            <tr><td>Finishing</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stsFinishing1_status', 'Done')">✅</button></td></tr>
+        </table>
+
+        <br>
+        <label for="stsFinishingRemark_1">Remarks:</label>
+        <textarea id="stsFinishingRemark_1"></textarea>
+    </fieldset>
+</div>
+
+<button type="button" class="add-btn" onclick="addStsFinishingStatus()">+ ADD NEW FINISHING STATUS FOR STS</button>
+</fieldset>
+
+<br>
 
 <button type="button" class="action-btn" onclick="previewData()">PREVIEW</button>
 <button type="button" class="action-btn" onclick="copyClipboard()">COPY TO CLIPBOARD</button>
+<button type="button" class="action-btn whatsapp-btn" onclick="shareOnWhatsApp()">SHARE ON WHATSAPP</button>
 
 <div id="previewBox"></div>
 
@@ -707,6 +908,8 @@ textarea:focus {
 const statusData = {};
 let lvCount = 1;
 let stsLvCount = 1;
+let coreFinishingCount = 1;
+let stsFinishingCount = 1;
 
 function handleRadioToggle(radio, callback) {
     if (radio.wasChecked) {
@@ -770,7 +973,6 @@ function addLvStatus() {
         </div>
 
         <label for="lvSerial_${currentCount}">Unit Serial Number:</label>
-        <br>
         <input type="text" id="lvSerial_${currentCount}" class="lv-serial">
         <br><br>
 
@@ -809,7 +1011,6 @@ function addStsLvStatus() {
         </div>
 
         <label for="stslvSerial_${stsLvCount}">Unit Serial Number:</label>
-        <br>
         <input type="text" id="stslvSerial_${stsLvCount}" class="lv-serial">
         <br><br>
 
@@ -824,6 +1025,76 @@ function addStsLvStatus() {
         <br>
         <label for="stslvRemark_${stsLvCount}">Remarks:</label>
         <textarea id="stslvRemark_${stsLvCount}"></textarea>
+    `;
+    container.appendChild(fieldset);
+}
+
+function addCoreFinishingStatus() {
+    coreFinishingCount++;
+    const container = document.getElementById('coreFinishingContainer');
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'sub-fieldset';
+    fieldset.id = 'coreFinishing_fieldset_' + coreFinishingCount;
+    
+    fieldset.innerHTML = `
+        <legend>FINISHING STATUS FOR CORE #${coreFinishingCount}</legend>
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Type:</span>
+            <label class="radio-option">
+                <input type="radio" name="coreFinishing_ups_${coreFinishingCount}" value="2X" onclick="handleRadioToggle(this)"> 2X
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="coreFinishing_ups_${coreFinishingCount}" value="3X" onclick="handleRadioToggle(this)"> 3X
+            </label>
+        </div>
+
+        <label for="coreFinishingSerial_${coreFinishingCount}">Unit Serial Number:</label>
+        <input type="text" id="coreFinishingSerial_${coreFinishingCount}" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th></tr>
+            <tr><td>Finishing</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'coreFinishing${coreFinishingCount}_status', 'Done')">✅</button></td></tr>
+        </table>
+
+        <br>
+        <label for="coreFinishingRemark_${coreFinishingCount}">Remarks:</label>
+        <textarea id="coreFinishingRemark_${coreFinishingCount}"></textarea>
+    `;
+    container.appendChild(fieldset);
+}
+
+function addStsFinishingStatus() {
+    stsFinishingCount++;
+    const container = document.getElementById('stsFinishingContainer');
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'sub-fieldset';
+    fieldset.id = 'stsFinishing_fieldset_' + stsFinishingCount;
+    
+    fieldset.innerHTML = `
+        <legend>FINISHING STATUS FOR STS #${stsFinishingCount}</legend>
+        <div class="radio-group-container">
+            <span class="radio-label">UPS Rating:</span>
+            <label class="radio-option">
+                <input type="radio" name="stsFinishing_rating_${stsFinishingCount}" value="2400A" onclick="handleRadioToggle(this)"> 2400A
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="stsFinishing_rating_${stsFinishingCount}" value="3000A" onclick="handleRadioToggle(this)"> 3000A
+            </label>
+        </div>
+
+        <label for="stsFinishingSerial_${stsFinishingCount}">Unit Serial Number:</label>
+        <input type="text" id="stsFinishingSerial_${stsFinishingCount}" class="lv-serial">
+        <br><br>
+
+        <table>
+            <tr><th>TEST NAME</th><th>DONE</th></tr>
+            <tr><td>Finishing</td><td><button type="button" class="status-btn" onclick="setStatus(this, 'stsFinishing${stsFinishingCount}_status', 'Done')">✅</button></td></tr>
+        </table>
+
+        <br>
+        <label for="stsFinishingRemark_${stsFinishingCount}">Remarks:</label>
+        <textarea id="stsFinishingRemark_${stsFinishingCount}"></textarea>
     `;
     container.appendChild(fieldset);
 }
@@ -898,27 +1169,29 @@ function addPreview(title, serial, specLabel, specValue, tests, remark, isLv = f
     output += specLabel + ": " + specValue + "\n";
     output += "Serial No: " + serial.trim() + "\n\n";
 
-    // 1. Check if ALL tests in the section are completed ('Done')
     let allTestsDone = tests.every(function(t){
         return t[1] === "Done";
     });
 
-    // Apply "Finishing ✅" ONLY for Test Bays & Heatrun Bays (if isLv is false)
     if (allTestsDone && !isLv) {
         output += "• Finishing ✅\n";
     } else {
-        // 2. Process Booster Cores consolidation if present and not all overall tests are done
         let processedTests = [];
         let boosterTests = tests.filter(t => t[0].startsWith("Booster Core"));
 
         if (boosterTests.length > 0) {
             let allBoosterDone = boosterTests.every(t => t[1] === "Done");
+            let allBoosterNotDone = boosterTests.every(t => (t[1] || "Not Done") === "Not Done");
             
             tests.forEach(function(t) {
                 if (t[0].startsWith("Booster Core")) {
                     if (allBoosterDone) {
                         if (!processedTests.some(pt => pt[0] === "Booster")) {
                             processedTests.push(["Booster", "Done"]);
+                        }
+                    } else if (allBoosterNotDone) {
+                        if (!processedTests.some(pt => pt[0] === "Booster")) {
+                            processedTests.push(["Booster", "Not Done"]);
                         }
                     } else {
                         processedTests.push(t);
@@ -931,7 +1204,6 @@ function addPreview(title, serial, specLabel, specValue, tests, remark, isLv = f
             processedTests = tests;
         }
 
-        // Render tests line by line
         processedTests.forEach(function(t){
             let testName = t[0];
             let status = t[1];
@@ -999,7 +1271,7 @@ function previewData(){
             upsType,
             testsList,
             document.getElementById("remark" + bay).value,
-            false // Not LV Status
+            false
         );
     });
 
@@ -1020,7 +1292,25 @@ function previewData(){
             lvType,
             lvTests,
             lvRemark,
-            true // Is LV Status
+            true
+        );
+    }
+
+    for (let c = 1; c <= coreFinishingCount; c++) {
+        let coreFinishingType = getRadio("coreFinishing_ups_" + c);
+        let coreFinishingSerial = document.getElementById("coreFinishingSerial_" + c) ? document.getElementById("coreFinishingSerial_" + c).value : "";
+        let coreFinishingRemark = document.getElementById("coreFinishingRemark_" + c) ? document.getElementById("coreFinishingRemark_" + c).value : "";
+        let coreFinishingTests = [
+            ["Finishing", getStatus("coreFinishing" + c + "_status")]
+        ];
+        output += addPreview(
+            "FINISHING STATUS FOR CORE #" + c,
+            coreFinishingSerial,
+            "UPS Type",
+            coreFinishingType,
+            coreFinishingTests,
+            coreFinishingRemark,
+            true
         );
     }
 
@@ -1037,7 +1327,7 @@ function previewData(){
             ["Data Save", getStatus("sts1_save")]
         ],
         document.getElementById("stsRemark1").value,
-        false // Not LV Status
+        false
     );
 
     output += addPreview(
@@ -1051,7 +1341,7 @@ function previewData(){
             ["480V/60Hz", getStatus("heat1_480")]
         ],
         document.getElementById("heatRemark1").value,
-        false // Not LV Status
+        false
     );
 
     output += addPreview(
@@ -1067,7 +1357,7 @@ function previewData(){
             ["Data Save", getStatus("sts2_save")]
         ],
         document.getElementById("stsRemark2").value,
-        false // Not LV Status
+        false
     );
 
     output += addPreview(
@@ -1081,7 +1371,7 @@ function previewData(){
             ["480V/60Hz", getStatus("heat2_480")]
         ],
         document.getElementById("heatRemark2").value,
-        false // Not LV Status
+        false
     );
 
     for (let j = 1; j <= stsLvCount; j++) {
@@ -1101,7 +1391,25 @@ function previewData(){
             stslvRating,
             stslvTests,
             stslvRemark,
-            true // Is LV Status
+            true
+        );
+    }
+
+    for (let s = 1; s <= stsFinishingCount; s++) {
+        let stsFinishingRating = getRadio("stsFinishing_rating_" + s);
+        let stsFinishingSerial = document.getElementById("stsFinishingSerial_" + s) ? document.getElementById("stsFinishingSerial_" + s).value : "";
+        let stsFinishingRemark = document.getElementById("stsFinishingRemark_" + s) ? document.getElementById("stsFinishingRemark_" + s).value : "";
+        let stsFinishingTests = [
+            ["Finishing", getStatus("stsFinishing" + s + "_status")]
+        ];
+        output += addPreview(
+            "FINISHING STATUS FOR STS #" + s,
+            stsFinishingSerial,
+            "UPS Rating",
+            stsFinishingRating,
+            stsFinishingTests,
+            stsFinishingRemark,
+            true
         );
     }
 
@@ -1127,6 +1435,30 @@ function copyClipboard() {
     } else {
         fallbackCopyText(text);
     }
+}
+
+function shareOnWhatsApp() {
+    previewData();
+
+    const text = document.getElementById("previewBox").innerText;
+    
+    if (!text || text.trim() === "" || text.trim() === "*DAILY TRINERGY STATUS*\n*Date:* N/A") {
+        alert("Nothing to share! Please enter data first.");
+        return;
+    }
+
+    const overlay = document.getElementById("loadingOverlay");
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        const encodedMessage = encodeURIComponent(text);
+        const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+        window.location.href = whatsappURL;
+
+        setTimeout(() => {
+            overlay.classList.remove("active");
+        }, 1000);
+    }, 400);
 }
 
 function fallbackCopyText(text) {
